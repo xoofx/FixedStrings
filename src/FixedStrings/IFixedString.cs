@@ -41,6 +41,6 @@ public interface IFixedString<T> : IFixedString, IEquatable<T> where T: IFixedSt
     /// <summary>
     /// Converts a string to a fixed string.
     /// </summary>
-    /// <param name="s"></param>
+    /// <param name="s">The string to convert to a fixed string.</param>
     static abstract implicit operator T(string s);
 }
