@@ -1,4 +1,4 @@
-# FixedStrings [![Build Status](https://github.com/xoofx/FixedStrings/workflows/ci/badge.svg?branch=main)](https://github.com/xoofx/FixedStrings/actions) [![NuGet](https://img.shields.io/nuget/v/FixedStrings.svg)](https://www.nuget.org/packages/FixedStrings/)
+# FixedStrings [![ci](https://github.com/xoofx/FixedStrings/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/xoofx/FixedStrings/actions/workflows/ci.yml) [![NuGet](https://img.shields.io/nuget/v/FixedStrings.svg)](https://www.nuget.org/packages/FixedStrings/)
 
 <img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/FixedStrings/main/img/FixedStrings.png">
 
