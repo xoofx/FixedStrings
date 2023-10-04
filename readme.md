@@ -13,12 +13,7 @@ Console.Out.WriteLine(str.AsSpan());
 
 ## Features
 
-- Zero allocation via `FixedString8`, `FixedString16`, `FixedString32` and `FixedString64` structs.
-- Supporting alignment and format for interpolated values
-  ```c#
-  byte value = 10; 
-  FixedString16 str = $"Test 0x{value:X2}";
-  ```        
+- Zero allocation via `FixedString8`, `FixedString16`, `FixedString32` and `FixedString64` structs.     
 - Compatible with `net7.0`+
 
 ## User Guide
@@ -95,7 +90,11 @@ FixedStrings are not meant to replace all strings in your application. They are 
   > FixedString8 str = $"Hello{int.MaxValue}";
   > ```
   > will result in ` str` containing `"Hello"`, with the int value being discarded as it cannot fit within the fixed string.
-
+- Supporting alignment and format for interpolated values
+  ```c#
+  byte value = 10; 
+  FixedString16 str = $"Test 0x{value:X2}";
+  ```
 - FixedStrings support assigning from a regular string:
   ```c#
   FixedString8 str = "Hello";
