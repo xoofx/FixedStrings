@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>This is a default project description</Description>
+    <Description>FixedStrings provides a zero allocation valuetype based fixed string implementation with the following size 8/16/32/64.</Description>
     <Copyright>Alexandre Mutel</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Alexandre Mutel</Authors>
-    <PackageTags>tag1;tag2;tag3</PackageTags>
+    <PackageTags>fixedstring;performance</PackageTags>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageIcon>FixedStrings.png</PackageIcon>
     <PackageProjectUrl>https://github.com/xoofx/</PackageProjectUrl>
