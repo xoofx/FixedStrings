@@ -3,6 +3,7 @@
 // See license.txt file in the project root for full license information.
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -166,9 +167,16 @@ public struct FixedString8 : IFixedString<FixedString8>
         return hash;
     }
 
-    /// <inheritedoc />
+    /// <summary>
+    /// Returns a span of characters that contains the characters of this string.
+    /// </summary>
+    /// <returns>A span of characters that contains the characters of this string.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [UnscopedRef]
     public readonly ReadOnlySpan<char> AsSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref Unsafe.AsRef(_c0)), _length);
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    Span<char> IFixedString.GetUnsafeFullSpan() => AsUnsafeFullSpan();
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString8"/>.
@@ -197,10 +205,11 @@ public struct FixedString8 : IFixedString<FixedString8>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
+    private Span<char> AsUnsafeFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsRemainingSpan() => AsFullSpan().Slice(_length);
+    [UnscopedRef]
+    private Span<char> AsRemainingSpan() => AsUnsafeFullSpan().Slice(_length);
 
     /// <summary>
     /// Appends or inserts the specified alignment at the specified position.
@@ -238,7 +247,7 @@ public struct FixedString8 : IFixedString<FixedString8>
             {
                 var endPositionFill = startPosition + numberOfCharsToAppendOrInsert;
 
-                var span = AsFullSpan();
+                var span = AsUnsafeFullSpan();
                 if (endPositionFill < MaxLength)
                 {
                     var maxLengthToCopy = Math.Min(MaxLength, endPositionFill + length) - endPositionFill;
@@ -419,9 +428,15 @@ public struct FixedString16 : IFixedString<FixedString16>
         return hash;
     }
 
-    /// <inheritedoc />
+    /// <summary>
+    /// Returns a span of characters that contains the characters of this string.
+    /// </summary>
+    /// <returns>A span of characters that contains the characters of this string.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [UnscopedRef]
     public readonly ReadOnlySpan<char> AsSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref Unsafe.AsRef(_c0)), _length);
+
+    Span<char> IFixedString.GetUnsafeFullSpan() => AsUnsafeFullSpan();
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString16"/>.
@@ -450,10 +465,11 @@ public struct FixedString16 : IFixedString<FixedString16>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
+    private Span<char> AsUnsafeFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsRemainingSpan() => AsFullSpan().Slice(_length);
+    [UnscopedRef]
+    private Span<char> AsRemainingSpan() => AsUnsafeFullSpan().Slice(_length);
 
     /// <summary>
     /// Appends or inserts the specified alignment at the specified position.
@@ -491,7 +507,7 @@ public struct FixedString16 : IFixedString<FixedString16>
             {
                 var endPositionFill = startPosition + numberOfCharsToAppendOrInsert;
 
-                var span = AsFullSpan();
+                var span = AsUnsafeFullSpan();
                 if (endPositionFill < MaxLength)
                 {
                     var maxLengthToCopy = Math.Min(MaxLength, endPositionFill + length) - endPositionFill;
@@ -688,9 +704,15 @@ public struct FixedString32 : IFixedString<FixedString32>
         return hash;
     }
 
-    /// <inheritedoc />
+    /// <summary>
+    /// Returns a span of characters that contains the characters of this string.
+    /// </summary>
+    /// <returns>A span of characters that contains the characters of this string.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [UnscopedRef]
     public readonly ReadOnlySpan<char> AsSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref Unsafe.AsRef(_c0)), _length);
+
+    Span<char> IFixedString.GetUnsafeFullSpan() => AsUnsafeFullSpan();
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString32"/>.
@@ -719,10 +741,11 @@ public struct FixedString32 : IFixedString<FixedString32>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
+    private Span<char> AsUnsafeFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsRemainingSpan() => AsFullSpan().Slice(_length);
+    [UnscopedRef]
+    private Span<char> AsRemainingSpan() => AsUnsafeFullSpan().Slice(_length);
 
     /// <summary>
     /// Appends or inserts the specified alignment at the specified position.
@@ -760,7 +783,7 @@ public struct FixedString32 : IFixedString<FixedString32>
             {
                 var endPositionFill = startPosition + numberOfCharsToAppendOrInsert;
 
-                var span = AsFullSpan();
+                var span = AsUnsafeFullSpan();
                 if (endPositionFill < MaxLength)
                 {
                     var maxLengthToCopy = Math.Min(MaxLength, endPositionFill + length) - endPositionFill;
@@ -989,9 +1012,15 @@ public struct FixedString64 : IFixedString<FixedString64>
         return hash;
     }
 
-    /// <inheritedoc />
+    /// <summary>
+    /// Returns a span of characters that contains the characters of this string.
+    /// </summary>
+    /// <returns>A span of characters that contains the characters of this string.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [UnscopedRef]
     public readonly ReadOnlySpan<char> AsSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref Unsafe.AsRef(_c0)), _length);
+
+    Span<char> IFixedString.GetUnsafeFullSpan() => AsUnsafeFullSpan();
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString64"/>.
@@ -1020,10 +1049,11 @@ public struct FixedString64 : IFixedString<FixedString64>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
+    private Span<char> AsUnsafeFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsRemainingSpan() => AsFullSpan().Slice(_length);
+    [UnscopedRef]
+    private Span<char> AsRemainingSpan() => AsUnsafeFullSpan().Slice(_length);
 
     /// <summary>
     /// Appends or inserts the specified alignment at the specified position.
@@ -1061,7 +1091,7 @@ public struct FixedString64 : IFixedString<FixedString64>
             {
                 var endPositionFill = startPosition + numberOfCharsToAppendOrInsert;
 
-                var span = AsFullSpan();
+                var span = AsUnsafeFullSpan();
                 if (endPositionFill < MaxLength)
                 {
                     var maxLengthToCopy = Math.Min(MaxLength, endPositionFill + length) - endPositionFill;

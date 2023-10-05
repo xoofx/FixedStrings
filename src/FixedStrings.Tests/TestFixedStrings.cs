@@ -341,7 +341,7 @@ public class TestFixedStrings
         Assert.NotNull(fs.GetHashCode());
 
         // Verify AsSpan()
-        Assert.True(expectedString.AsSpan().SequenceEqual(fs.AsSpan()));
+        Assert.True(expectedString.AsSpan().SequenceEqual(fs.GetUnsafeFullSpan().Slice(0, fs.Length)));
 
         // Verify TryFormat()
         var tryFormat = $"{fs}";

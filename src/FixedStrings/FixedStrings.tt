@@ -9,6 +9,7 @@
 // See license.txt file in the project root for full license information.
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -169,9 +170,15 @@ public struct FixedString<#= size #> : IFixedString<FixedString<#= size #>>
         return hash;
     }
 
-    /// <inheritedoc />
+    /// <summary>
+    /// Returns a span of characters that contains the characters of this string.
+    /// </summary>
+    /// <returns>A span of characters that contains the characters of this string.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [UnscopedRef]
     public readonly ReadOnlySpan<char> AsSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref Unsafe.AsRef(_c0)), _length);
+
+    Span<char> IFixedString.GetUnsafeFullSpan() => AsUnsafeFullSpan();
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString<#= size #>"/>.
@@ -200,10 +207,11 @@ public struct FixedString<#= size #> : IFixedString<FixedString<#= size #>>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
+    private Span<char> AsUnsafeFullSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref _c0), MaxLength);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private Span<char> AsRemainingSpan() => AsFullSpan().Slice(_length);
+    [UnscopedRef]
+    private Span<char> AsRemainingSpan() => AsUnsafeFullSpan().Slice(_length);
 
     /// <summary>
     /// Appends or inserts the specified alignment at the specified position.
@@ -241,7 +249,7 @@ public struct FixedString<#= size #> : IFixedString<FixedString<#= size #>>
             {
                 var endPositionFill = startPosition + numberOfCharsToAppendOrInsert;
 
-                var span = AsFullSpan();
+                var span = AsUnsafeFullSpan();
                 if (endPositionFill < MaxLength)
                 {
                     var maxLengthToCopy = Math.Min(MaxLength, endPositionFill + length) - endPositionFill;
