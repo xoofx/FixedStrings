@@ -113,10 +113,10 @@ FixedStrings are not meant to replace all strings in your application. They are 
 
 - FixedStrings implement [`IFixedString<T>`](https://github.com/xoofx/FixedStrings/blob/main/src/FixedStrings/IFixedString.cs) and can be used as a generic constraint:
   ```c#
-  public ReadOnlySpan<char> Foo<T>(T value) where T : IFixedString<T>
+  public int Foo<T>(T value) where T : IFixedString<T>
   {
       // ...
-      return value.AsSpan();
+      return value.Length;
   }
   ```
 
