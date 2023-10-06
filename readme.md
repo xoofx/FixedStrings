@@ -36,12 +36,12 @@ FixedStrings is relying on the C# 10 [interpolated string handlers](https://lear
 
 But unlike classical usage of interpolated string handlers, a FixedString is in fact itself **an interpolation handler**, using a fixed size buffer to store the string.
 
-| Fixed String Type | Number of Chars | Total Size
-|-------------------|-----------------|---------------------
-| `FixedString8`    |        7        | 16 bytes
-| `FixedString16`   |        15       | 32 bytes
-| `FixedString32`   |        31       | 64 bytes
-| `FixedString64`   |        63       | 128 bytes
+| Fixed String Type | Maximum Number of Chars | Total Size
+|-------------------|-------------------------|---------------------
+| `FixedString8`    |        7                | 16 bytes
+| `FixedString16`   |        15               | 32 bytes
+| `FixedString32`   |        31               | 64 bytes
+| `FixedString64`   |        63               | 128 bytes
 
 Each fixed string contains a `short` value for the length.
 
