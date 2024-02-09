@@ -47,7 +47,7 @@ public struct FixedString<#= size #> : IFixedString<FixedString<#= size #>>
         _length = 0;
     }
 
-        /// <summary>
+    /// <summary>
     /// Initializes a new instance of the <see cref="FixedString<#= size #>"/> struct.
     /// </summary>
     public FixedString<#= size #>(string value)
@@ -182,6 +182,7 @@ public struct FixedString<#= size #> : IFixedString<FixedString<#= size #>>
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString<#= size #>"/>.
+    /// </summary>
     [SkipLocalsInit]    
     public static implicit operator FixedString<#= size #>(string s) => new(s);
 

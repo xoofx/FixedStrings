@@ -44,7 +44,7 @@ public struct FixedString8 : IFixedString<FixedString8>
         _length = 0;
     }
 
-        /// <summary>
+    /// <summary>
     /// Initializes a new instance of the <see cref="FixedString8"/> struct.
     /// </summary>
     public FixedString8(string value)
@@ -175,11 +175,11 @@ public struct FixedString8 : IFixedString<FixedString8>
     [UnscopedRef]
     public readonly ReadOnlySpan<char> AsSpan() => MemoryMarshal.CreateSpan(ref Unsafe.As<short, char>(ref Unsafe.AsRef(_c0)), _length);
 
-    [EditorBrowsable(EditorBrowsableState.Never)]
     Span<char> IFixedString.GetUnsafeFullSpan() => AsUnsafeFullSpan();
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString8"/>.
+    /// </summary>
     [SkipLocalsInit]    
     public static implicit operator FixedString8(string s) => new(s);
 
@@ -305,7 +305,7 @@ public struct FixedString16 : IFixedString<FixedString16>
         _length = 0;
     }
 
-        /// <summary>
+    /// <summary>
     /// Initializes a new instance of the <see cref="FixedString16"/> struct.
     /// </summary>
     public FixedString16(string value)
@@ -440,6 +440,7 @@ public struct FixedString16 : IFixedString<FixedString16>
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString16"/>.
+    /// </summary>
     [SkipLocalsInit]    
     public static implicit operator FixedString16(string s) => new(s);
 
@@ -581,7 +582,7 @@ public struct FixedString32 : IFixedString<FixedString32>
         _length = 0;
     }
 
-        /// <summary>
+    /// <summary>
     /// Initializes a new instance of the <see cref="FixedString32"/> struct.
     /// </summary>
     public FixedString32(string value)
@@ -716,6 +717,7 @@ public struct FixedString32 : IFixedString<FixedString32>
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString32"/>.
+    /// </summary>
     [SkipLocalsInit]    
     public static implicit operator FixedString32(string s) => new(s);
 
@@ -889,7 +891,7 @@ public struct FixedString64 : IFixedString<FixedString64>
         _length = 0;
     }
 
-        /// <summary>
+    /// <summary>
     /// Initializes a new instance of the <see cref="FixedString64"/> struct.
     /// </summary>
     public FixedString64(string value)
@@ -1024,6 +1026,7 @@ public struct FixedString64 : IFixedString<FixedString64>
 
     /// <summary>
     /// Implicit conversion from <see cref="string"/> to <see cref="FixedString64"/>.
+    /// </summary>
     [SkipLocalsInit]    
     public static implicit operator FixedString64(string s) => new(s);
 
